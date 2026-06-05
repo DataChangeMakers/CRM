@@ -1,0 +1,217 @@
+{
+  "entities": {
+    "nonProfit": {
+      "title": "Non-Profit",
+      "description": "Details about a non-profit organization.",
+      "type": "object",
+      "properties": {
+        "name": { "type": "string", "description": "Legal name of the organization" },
+        "revenue": { "type": "string", "description": "Estimated annual revenue" },
+        "staffCount": { "type": "string", "description": "Number of staff members" },
+        "services": { "type": "string", "description": "Products or services provided" },
+        "website": { "type": "string", "description": "Official website URL" },
+        "projectDocUrl": { "type": "string", "description": "Link to the submitted project brief or document" },
+        "briefSummary": { "type": "string", "description": "AI-generated summary of the project brief" },
+        "researchNotes": { "type": "string", "description": "AI-generated research notes" }
+      },
+      "required": ["name"]
+    },
+    "researchLog": {
+      "title": "Research Log",
+      "description": "Log of previous AI research searches.",
+      "type": "object",
+      "properties": {
+        "query": { "type": "string" },
+        "timestamp": { "type": "string", "format": "date-time" },
+        "resultSummary": { "type": "string" }
+      }
+    },
+    "assessment": {
+      "title": "Assessment",
+      "description": "Scoring and validation for a non-profit project project.",
+      "type": "object",
+      "properties": {
+        "nonProfitId": { "type": "string", "description": "ID of the non-profit" },
+        "verification": { "type": "object", "description": "Dynamic verification responses mapped by question ID" },
+        "validation": { "type": "object", "description": "Dynamic validation responses mapped by question ID" },
+        "validationChecks": { "type": "object", "description": "Additional manual checks" },
+        "averageScore": { "type": "number" },
+        "isValidated": { "type": "boolean" },
+        "status": { "type": "string", "enum": ["pending", "in-progress", "approved", "rejected"] },
+        "createdAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["nonProfitId", "status"]
+    },
+    "projectBrief": {
+      "title": "Project Brief",
+      "description": "Detailed project requirements submitted by the non-profit.",
+      "type": "object",
+      "properties": {
+        "nonProfitId": { "type": "string" },
+        "keyContact": {
+          "type": "object",
+          "properties": {
+            "name": { "type": "string" },
+            "email": { "type": "string" },
+            "position": { "type": "string" }
+          }
+        },
+        "startDate": { "type": "string" },
+        "description": { "type": "string" },
+        "goals": { "type": "string" },
+        "metrics": { "type": "string" },
+        "designPreferences": { "type": "string" },
+        "impact": { "type": "string" },
+        "timeline": { "type": "string" },
+        "currentDataUsage": { "type": "string" },
+        "guidingQuestions": { "type": "string" },
+        "sampleDataDescription": { "type": "string" },
+        "dataSensitivity": { "type": "string" }
+      },
+      "required": ["nonProfitId"]
+    },
+    "lead": {
+      "title": "DCM Lead",
+      "description": "Relationship management record for potential partner organizations.",
+      "type": "object",
+      "properties": {
+        "organisation": { "type": "string" },
+        "activity": { "type": "string" },
+        "attachments": { "type": "string" },
+        "city": { "type": "string" },
+        "comments": { "type": "string" },
+        "contactName": { "type": "string" },
+        "country": { "type": "string" },
+        "directLink": { "type": "string" },
+        "donation": { "type": "string" },
+        "email": { "type": "string" },
+        "lastContact": { "type": "string" },
+        "leadType": { "type": "string" },
+        "leadOwner": { "type": "string" },
+        "leadStatus": { "type": "string" },
+        "projectLanguages": { "type": "string" },
+        "projectPotentialDate": { "type": "string" },
+        "referredBy": { "type": "string" },
+        "website": { "type": "string" },
+        "whatsNext": { "type": "string" },
+        "assessedBy": { "type": "string" },
+        "assessedAt": { "type": "string", "format": "date-time" },
+        "dcmComment": { "type": "string" },
+        "dcmName": { "type": "string" },
+        "approved": { "type": "boolean" },
+        "approvedAt": { "type": "string", "format": "date-time" },
+        "approvedBy": { "type": "string" },
+        "approvalComment": { "type": "string" },
+        "notes": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "text": { "type": "string" },
+              "date": { "type": "string" },
+              "author": { "type": "string" }
+            }
+          }
+        }
+      },
+      "required": ["organisation", "leadStatus"]
+    },
+    "appUser": {
+      "title": "App User",
+      "description": "System user with role-based access.",
+      "type": "object",
+      "properties": {
+        "email": { "type": "string" },
+        "displayName": { "type": "string" },
+        "role": { "type": "string", "enum": ["Admin", "DCM Boards", "Assessor"] },
+        "createdAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["email", "role"]
+    },
+    "appSettings": {
+      "title": "App Settings",
+      "description": "Global configuration for the application.",
+      "type": "object",
+      "properties": {
+        "scoring": {
+          "type": "object",
+          "properties": {
+            "verificationQuestions": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "id": { "type": "string" },
+                  "label": { "type": "string" },
+                  "type": { "type": "string", "enum": ["boolean", "number", "string"] }
+                }
+              }
+            },
+            "validationQuestions": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "id": { "type": "string" },
+                  "label": { "type": "string" },
+                  "type": { "type": "string", "enum": ["boolean", "number", "string"] }
+                }
+              }
+            }
+          }
+        },
+        "aiResearch": {
+          "type": "object",
+          "properties": {
+            "sources": { "type": "array", "items": { "type": "string" } },
+            "model": { "type": "string" },
+            "parameters": { "type": "object" }
+          }
+        },
+        "leadsConfig": {
+          "type": "object",
+          "properties": {
+            "statuses": { "type": "array", "items": { "type": "string" } },
+            "types": { "type": "array", "items": { "type": "string" } }
+          }
+        }
+      }
+    },
+    "archivedLead": {
+      "title": "Archived Lead",
+      "description": "Deleted lead stored for potential restoration.",
+      "type": "object",
+      "properties": {
+        "archivedAt": { "type": "string", "format": "date-time" },
+        "archivedBy": { "type": "string" },
+        "archiveReason": { "type": "string" }
+      },
+      "required": ["archivedAt"]
+    },
+    "timelineEvent": {
+      "title": "Timeline Event",
+      "description": "Historical record of an action taken on a lead.",
+      "type": "object",
+      "properties": {
+        "type": { "type": "string" },
+        "description": { "type": "string" },
+        "author": { "type": "string" },
+        "authorEmail": { "type": "string" },
+        "timestamp": { "type": "string", "format": "date-time" },
+        "metadata": { "type": "object", "description": "Additional context about the event" }
+      },
+      "required": ["type", "description", "timestamp"]
+    }
+  },
+  "firestore": {
+    "/nonProfits/{nonProfitId}": { "schema": "nonProfit", "description": "Collection of non-profit organizations." },
+    "/researchLogs/{logId}": { "schema": "researchLog", "description": "History of AI search queries." },
+    "/assessments/{assessmentId}": { "schema": "assessment", "description": "Project suitability assessments." },
+    "/briefs/{briefId}": { "schema": "projectBrief", "description": "Detailed project briefs." },
+    "/leads/{leadId}": { "schema": "lead", "description": "Customer relationship management (CRM) records." },
+    "/leads/{leadId}/timeline/{eventId}": { "schema": "timelineEvent", "description": "Historical events for a specific lead." },
+    "/archivedLeads/{leadId}": { "schema": "archivedLead", "description": "Deleted CRM records awaiting restoration or permanent removal." },
+    "/appUsers/{userId}": { "schema": "appUser", "description": "Authorized system users." },
+    "/settings/global": { "schema": "appSettings", "description": "Global settings for the application." }
+  }
+}

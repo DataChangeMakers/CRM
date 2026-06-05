@@ -1,0 +1,10 @@
+{
+  "projectId": "data-changemaker-agent",
+  "appId": "1:209934179084:web:9f5785abfdaf49ddc0c729",
+  "apiKey": "AIzaSyAH8WisoD-PsSNISMvzicp5-tQNHsTwjyM",
+  "authDomain": "data-changemaker-agent.firebaseapp.com",
+  "firestoreDatabaseId": "ai-studio-9b371a7b-fa08-495a-8e4a-f4944c1a57fe",
+  "storageBucket": "data-changemaker-agent.firebasestorage.app",
+  "messagingSenderId": "209934179084",
+  "measurementId": ""
+}
